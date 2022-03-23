@@ -7,16 +7,16 @@ Menu::Menu():banco(Banco()){
     std::cout << "*                  SEJA BEM VINDO                 *" << std::endl;
     std::cout << "*               AO SEU BANCO DIGITAL              *" << std::endl;
     std::cout << "*                                                 *" << std::endl;
-    std::cout << "***************************************************\n\n\n" << std::endl;
+    std::cout << "***************************************************" << std::endl;
     std::cout << std::endl;
     int opcao = 0;
     while (opcao != 5) {
-        std::cout << "             Menu             \n" << std::endl;
+        std::cout << "\n\n             Menu             " << std::endl;
         std::cout << "1.Criar conta" << std::endl;
         std::cout << "2.Selecionar conta" << std::endl;
         std::cout << "3.Remover conta" << std::endl;
         std::cout << "4.Gerar relatorio" << std::endl;
-        std::cout << "5.Finalizar" << std::endl << std::endl;
+        std::cout << "5.Finalizar" << std::endl;
         std::cout << "\nDigite a opcao acima desejada: ";
         std::cin >> opcao;
         switch (opcao)
@@ -31,6 +31,7 @@ Menu::Menu():banco(Banco()){
             Menu::removerConta();
             break;
         case 4:
+            std::cout << "\n\n";
             banco.mostrarDados();
             break;
         case 5:
@@ -48,10 +49,10 @@ void Menu::criarConta(){
     bool escolhido = false;
     while (!escolhido)
     {
-        std::cout << "\n         Criar conta          \n" << std::endl;
+        std::cout << "\n\n         Criar conta          " << std::endl;
         std::cout << "1.Conta Corrente" << std::endl;
-        std::cout << "2.Conta Poupanca" << std::endl << std::endl;
-        std::cout << "3.Cancelar Operacao" << std::endl << std::endl;
+        std::cout << "2.Conta Poupanca" << std::endl;
+        std::cout << "3.Cancelar Operacao" << std::endl;
         std::cout << "\nDigite a opcao acima desejada: ";
         std::cin >> tipoConta;
         switch (tipoConta) {
@@ -66,7 +67,7 @@ void Menu::criarConta(){
             return;
             break;
         default:
-            std::cout << std::endl << "Opcao invalida." << std::endl << std::endl;
+            std::cout << "\nOpcao invalida." << std::endl;
             break;
         }
     }
@@ -74,20 +75,20 @@ void Menu::criarConta(){
     int numeroConta = 0;
     double saldo = 0;
     ContaBancaria* conta;
-    std::cout << "\nDigite o numero da conta: " << std::endl;
+    std::cout << "\nDigite o numero da conta: ";
     std::cin >> numeroConta;
     conta= banco.procurarConta(numeroConta);
     while (conta != NULL) {
     std::cout << "\nNumero da conta ja existe." << std::endl;
-    std::cout << "\nDigite o numero da conta: " << std::endl;
+    std::cout << "\nDigite o numero da conta: ";
     std::cin >> numeroConta;
     conta = banco.procurarConta(numeroConta);
     }
-    std::cout << "Digite o saldo da sua conta: " << std::endl;
+    std::cout << "Digite o saldo da sua conta: ";
     std::cin >> saldo;
     while (saldo < 0) {
     std::cout << "\nNao eh possivel abrir conta com saldo menor que 0." << std::endl;
-    std::cout << "Digite o saldo da sua conta: " << std::endl;
+    std::cout << "Digite o saldo da sua conta: ";
     std::cin >> saldo;   
     }
 
@@ -95,7 +96,7 @@ void Menu::criarConta(){
     if (tipoConta == 1) novaConta = criarContaCorrente(numeroConta, saldo);
     else novaConta = criarContaPoupanca(numeroConta, saldo);
     banco.inserir(novaConta);
-    std::cout << "Conta criada com sucesso." << std::endl;
+    std::cout << "\nConta criada com sucesso." << std::endl;
 }
 
 ContaBancaria* Menu::criarContaCorrente(int numeroConta, double saldo) {
@@ -115,7 +116,7 @@ ContaBancaria* Menu::criarContaPoupanca(int numeroConta, double saldo) {
     std::cout << "Insira limite da conta: ";
     std::cin >> limite;
     while (limite <= 0) {
-        std::cout << "Nao eh possivel abrir conta com limite menor ou igual a 0." << std::endl;
+        std::cout << "\nNao eh possivel abrir conta com limite menor ou igual a 0." << std::endl;
         std::cout << "Insira o limite de operacao da conta: ";
         std::cin >> limite;
     }
@@ -125,23 +126,23 @@ ContaBancaria* Menu::criarContaPoupanca(int numeroConta, double saldo) {
 void Menu::removerConta(){
     ContaBancaria* conta;
     int numeroConta = 0;
-    std::cout << "Numero da conta: " << std::endl;
+    std::cout << "Numero da conta: ";
     std::cin >> numeroConta;
     conta = banco.procurarConta(numeroConta);
     while (conta == NULL) {
-        std::cout << "\nEssa conta nao existe. Digite numero de conta existente.  " << std::endl;
-        std::cout << "\nNumero conta: ";
+        std::cout << "\nEssa conta nao existe. Digite numero de conta existente." << std::endl;
+        std::cout << "Numero conta: ";
         std::cin >> numeroConta;
         conta = banco.procurarConta(numeroConta);
     }
     banco.remover(conta);
-    std::cout << std::endl << "\nConta removida com Sucesso." << std::endl;
+    std::cout << "\nConta removida com Sucesso." << std::endl;
 }
 
 void Menu::selecionarConta(){
     ContaBancaria* conta;
     int numeroConta = 0;
-    std::cout << "Numero da conta: " << std::endl;
+    std::cout << "Numero da conta: ";
     std::cin >> numeroConta;
     conta = banco.procurarConta(numeroConta);
     if (conta == NULL) {
@@ -150,13 +151,13 @@ void Menu::selecionarConta(){
     }
     int opcao = 0;
     while (opcao != 5) {
-        std::cout << "\n           Selecionar          \n" << std::endl;
-        std::cout << "\n1.Sacar" << std::endl;
-        std::cout << "\n2.Depositar" << std::endl;
-        std::cout << "\n3.Transferencia" << std::endl;
-        std::cout << "\n4.Gerar relatorio" << std::endl;
-        std::cout << "\n5.Retornar ao menu anterior" << std::endl << std::endl;
-        std::cout << "\nDigite a opcao acima desejada: ";
+        std::cout << "\n\n           Selecionar          " << std::endl;
+        std::cout << "1.Sacar" << std::endl;
+        std::cout << "2.Depositar" << std::endl;
+        std::cout << "3.Transferencia" << std::endl;
+        std::cout << "4.Gerar relatorio" << std::endl;
+        std::cout << "5.Retornar ao menu anterior" << std::endl << std::endl;
+        std::cout << "Digite a opcao acima desejada: ";
         std::cin >> opcao;
         switch (opcao)
         {
@@ -170,6 +171,7 @@ void Menu::selecionarConta(){
             Menu::transferencia(conta);
             break;
         case 4:
+            std::cout << '\n';
             conta->mostrarDados();
             break;
         case 5:
@@ -213,22 +215,21 @@ void Menu::transferencia(ContaBancaria* conta) {
     ContaBancaria* conta2;
     int numeroConta2 = 0;
     double transferencia = 0;
-    std::cout << "\nInforme o numero da conta que recebera a transferencia.\n " << std::endl;
-    std::cout << "Numero da conta: " << std::endl;
+    std::cout << "Informe o numero da conta que recebera a transferencia: ";
     std::cin >> numeroConta2;
     conta2 = banco.procurarConta(numeroConta2);
-    while (conta2 == NULL) {
-        std::cout << "\n conta nao existe.\n" << std::endl;
-        std::cout << "\nInforme o numero da conta que recebera a transferencia.\n " << std::endl;
-        std::cout << "Numero da conta: " << std::endl;
+    while (conta2 == NULL || conta2 == conta) {
+        if (conta2 == NULL)  std::cout << "\nConta nao existe." << std::endl;
+        else std::cout << "\nNao e possivel realizar transferencia para a propria conta." << std::endl;
+        std::cout << "\nInforme o numero da conta que recebera a transferencia: ";
         std::cin >> numeroConta2;
         conta2 = banco.procurarConta(numeroConta2);
     }
-    std::cout << "\nDigite o valor da transferencia: " << std::endl;
+    std::cout << "Digite o valor da transferencia: ";
     std::cin >> transferencia;
         
     while (transferencia <= 0) {
-        std::cout << "\nNao eh possivel transferir valores menores ou iguais a 0." << std::endl;
+        std::cout << "\nNao eh possivel transferir valores menores ou iguais a 0.\n" << std::endl;
         std::cout << "Digite o valor da transferencia: ";
         std::cin >> transferencia;
     }

@@ -8,7 +8,7 @@ taxaDeOperacao(taxaDeOperacao) {}
 bool ContaCorrente::sacar(double valor)
 {
 	valor += valor * this->taxaDeOperacao;
-	if (conta-valor >= 0) return ContaBancaria::sacar(valor);
+	if (saldo-valor >= 0) return ContaBancaria::sacar(valor);
 	return 0;
 }
 

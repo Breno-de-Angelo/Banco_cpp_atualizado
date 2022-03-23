@@ -34,7 +34,6 @@
     <ClCompile Include="contacorrente.cpp" />
     <ClCompile Include="contapoupanca.cpp" />
     <ClCompile Include="executavel.cpp" />
-    <ClCompile Include="imprimivel.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="main2.cpp" />
     <ClCompile Include="menu.cpp" />
