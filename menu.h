@@ -1,4 +1,5 @@
 #pragma once
+//Declara Bibliotecas
 #include "banco.h"
 #include "contacorrente.h"
 #include "contapoupanca.h"
@@ -9,6 +10,7 @@ private:
 	Banco banco;
 public:
 	Menu();
+	~Menu();
 	void criarConta();
 	ContaBancaria* criarContaCorrente(int, double);
 	ContaBancaria* criarContaPoupanca(int, double);

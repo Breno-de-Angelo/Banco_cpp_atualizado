@@ -1,7 +1,13 @@
 #include "menu.h"
 #include <iostream>
 
+Menu::~Menu() {
+    Banco* pBanco = &banco;
+    delete pBanco;
+}
+
 Menu::Menu():banco(Banco()){
+    //Inicializa interface do menu
     std::cout << "***************************************************" << std::endl;
     std::cout << "*                                                 *" << std::endl;
     std::cout << "*                  SEJA BEM VINDO                 *" << std::endl;
@@ -19,6 +25,7 @@ Menu::Menu():banco(Banco()){
         std::cout << "5.Finalizar" << std::endl;
         std::cout << "\nDigite a opcao acima desejada: ";
         std::cin >> opcao;
+        // O switch chama cada respectiva opcao caso ela for válida
         switch (opcao)
         {
         case 1:
@@ -31,7 +38,7 @@ Menu::Menu():banco(Banco()){
             Menu::removerConta();
             break;
         case 4:
-            std::cout << "\n\n";
+            std::cout << "\n";
             banco.mostrarDados();
             break;
         case 5:
@@ -44,17 +51,20 @@ Menu::Menu():banco(Banco()){
     }
 }
 
+//Criação de Conta
 void Menu::criarConta(){
     int tipoConta = 0;
     bool escolhido = false;
     while (!escolhido)
     {
+        //Inicializa interface do menu
         std::cout << "\n\n         Criar conta          " << std::endl;
         std::cout << "1.Conta Corrente" << std::endl;
         std::cout << "2.Conta Poupanca" << std::endl;
         std::cout << "3.Cancelar Operacao" << std::endl;
         std::cout << "\nDigite a opcao acima desejada: ";
         std::cin >> tipoConta;
+        // O switch chama cada respectiva opcao caso ela for válida
         switch (tipoConta) {
         case 1:
             escolhido = true;
@@ -99,6 +109,7 @@ void Menu::criarConta(){
     std::cout << "\nConta criada com sucesso." << std::endl;
 }
 
+//Cria conta Corrente
 ContaBancaria* Menu::criarContaCorrente(int numeroConta, double saldo) {
     double taxaOperacao = 0;
     std::cout << "Insira a taxa de operacao da conta: ";
@@ -111,6 +122,7 @@ ContaBancaria* Menu::criarContaCorrente(int numeroConta, double saldo) {
     return new ContaCorrente(numeroConta, saldo, taxaOperacao);
 }
 
+//Cria conta Poupanca
 ContaBancaria* Menu::criarContaPoupanca(int numeroConta, double saldo) {
     double limite = 0;
     std::cout << "Insira limite da conta: ";
@@ -123,6 +135,7 @@ ContaBancaria* Menu::criarContaPoupanca(int numeroConta, double saldo) {
     return new ContaPoupanca(numeroConta, saldo, limite);
 }
 
+//Remove a Conta
 void Menu::removerConta(){
     ContaBancaria* conta;
     int numeroConta = 0;
@@ -139,6 +152,7 @@ void Menu::removerConta(){
     std::cout << "\nConta removida com Sucesso." << std::endl;
 }
 
+//Seleciona a Conta
 void Menu::selecionarConta(){
     ContaBancaria* conta;
     int numeroConta = 0;
@@ -185,6 +199,7 @@ void Menu::selecionarConta(){
     }
 }
 
+//Operação de Saque na Conta
 void Menu::sacar(ContaBancaria* conta) {
     double saque = 0;
     std::cout << "Insira o valor que deseja sacar: ";
@@ -198,6 +213,7 @@ void Menu::sacar(ContaBancaria* conta) {
     else std::cout << "Saldo insuficiente para efetuar o saque." << std::endl;
 }
 
+//Operação de Depósito na Conta
 void Menu::depositar(ContaBancaria* conta) {
     double deposito = 0;
     std::cout << "Insira o valor do deposito: ";
@@ -211,6 +227,7 @@ void Menu::depositar(ContaBancaria* conta) {
     std::cout << "Deposito efetuado com sucesso." << std::endl;
 }
 
+//Operação de Transferencia entre Contas
 void Menu::transferencia(ContaBancaria* conta) {
     ContaBancaria* conta2;
     int numeroConta2 = 0;
@@ -233,7 +250,7 @@ void Menu::transferencia(ContaBancaria* conta) {
         std::cout << "Digite o valor da transferencia: ";
         std::cin >> transferencia;
     }
-    if(conta->tranasferir(transferencia, conta2))
+    if(conta->transferir(transferencia, conta2))
         std::cout << "\nTransferencia realizada com sucesso." << std::endl;
     else std::cout << "\nSaldo insuficiente para efetuar a transferencia." << std::endl;
 }

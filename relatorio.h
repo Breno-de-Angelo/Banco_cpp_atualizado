@@ -4,6 +4,7 @@ class Relatorio
 {
 public:
 	Relatorio();
+	~Relatorio() {};
 	void gerarRelatorio(Imprimivel*);
 };
 

@@ -1,4 +1,5 @@
 #pragma once
+//Declara Bibliotecas
 #include "contacorrente.h"
 #include "contapoupanca.h"
 #include "relatorio.h"
@@ -9,5 +10,6 @@ private:
 	ContaPoupanca contaPoupanca;
 public:
 	Executavel(double deposito1, double deposito2, double saque1, double saque2);
+	~Executavel() {};
 };
 
